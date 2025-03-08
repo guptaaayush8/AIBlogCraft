@@ -9,20 +9,25 @@ app = Flask(__name__)
 # $env:MYSQL_PASSWORD="Ploceusterraform1"
 # $env:MYSQL_DB="blogsdb"
 
-# def create_database_if_not_exists():
-#     db_name = os.environ["MYSQL_DB"]
-#     # Connect without specifying the database
-#     cnx = mysql.connector.connect(
-#         user=os.environ["MYSQL_USER"],
-#         host=os.environ["MYSQL_HOST"],
-#         port='3306',
-#         password=os.environ["MYSQL_PASSWORD"]
-#     )
-#     cursor = cnx.cursor()
-#     cursor.execute(f"CREATE DATABASE IF NOT EXISTS `{db_name}`;")
-#     print("Database Created")
-#     cursor.close()
-#     cnx.close()
+def create_table_if_not_exists():
+    table_name = os.environ["MYSQL_TABLENAME"]
+    # Connect without specifying the database
+    cnx = getMysqlConnection()
+    cursor = cnx.cursor()
+    cursor.execute(f"""
+                CREATE TABLE IF NOT EXISTS {table_name} (
+                    Id int NOT NULL auto_increment,
+                    Title varchar(255),
+                    Content TEXT,
+                    Author varchar(255),
+                    ShortContent TEXT,
+                    TimeUploaded TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                    primary key (id)
+                );
+                   """)
+    print("Database Created")
+    cursor.close()
+    cnx.close()
 
 def getMysqlConnection():
     return mysql.connector.connect(user=os.environ["MYSQL_USER"], host=os.environ["MYSQL_HOST"], port='3306', password=os.environ["MYSQL_PASSWORD"], database=os.environ["MYSQL_DB"])
@@ -104,4 +109,5 @@ def deleteBlog(id):
 if __name__ == "__main__":
     # print(os.environ)
     # create_database_if_not_exists()
+    create_table_if_not_exists()
     app.run(host ='0.0.0.0',port='5000',debug=True)

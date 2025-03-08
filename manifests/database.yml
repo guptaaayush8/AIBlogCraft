@@ -7,14 +7,14 @@ metadata:
 
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: mysql
   namespace: database
   labels:
     app: mysql
 spec:
-  serviceName: mysql
+  # serviceName: mysql
   replicas: 1
   selector:
     matchLabels:
@@ -33,7 +33,16 @@ spec:
         envFrom:
         - secretRef:
             name: mysqldetails
-
+        # command:
+        # - /bin/sh
+        # - -c 
+        # - |
+        #   until mysqladmin ping -h 127.0.0.1 -u root -p"${MYSQL_ROOT_PASSWORD}" --silent; do
+        #       echo "Waiting for MySQL server to be available..."
+        #       sleep 2
+        #   done && \
+        #   mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};" && \
+        #   mysql -u root -p${MYSQL_ROOT_PASSWORD} -e "USE your_database; CREATE TABLE IF NOT EXISTS ${MYSQL_TABLENAME} (Id int NOT NULL auto_increment, Title varchar(255), Content TEXT, Author varchar(255), ShortContent TEXT, TimeUploaded TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, primary key (id));"
         # env:
         #   - name: MYSQL_USER
         #     valueFrom:
@@ -54,16 +63,21 @@ spec:
         volumeMounts:
           - name: mysql-storage
             mountPath: /var/lib/mysql
-  volumeClaimTemplates:
-  - metadata:
-      name: mysql-storage
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      # storageClassName: hostpath  # Change if you have a different storage class
-      volumeName: pv-hostpath
-      resources:
-        requests:
-          storage: 0.5Gi
+
+      volumes: 
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: mysql-pvc         
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: mysql-storage
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     # storageClassName: hostpath  # Change if you have a different storage class
+  #     volumeName: pv-hostpath
+  #     resources:
+  #       requests:
+  #         storage: 0.5Gi
 
 
 

@@ -9,4 +9,20 @@ spec:
     storage: 1Gi
   storageClassName: hostpath
   hostPath:
-    path: /database
+    path: /mysql
+
+
+--- 
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: pv-hostpath
+  # storageClassName: standard
