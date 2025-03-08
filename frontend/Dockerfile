@@ -1,18 +1,18 @@
 # Stage 1: Builder
-FROM node:23-alpine AS builder
+FROM node:18-slim AS builder
 
 WORKDIR /usr/src/app
 
 # Copy package files and install all dependencies (including dev)
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 # Copy rest of the source code and run the build script
 COPY . .
 RUN npm run build
 
 # Stage 2: Production
-FROM node:23-slim
+FROM node:18-slim
 
 WORKDIR /usr/src/app
 

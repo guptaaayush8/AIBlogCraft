@@ -48,7 +48,7 @@ export default function Home({ blog }) {
 }
 
 export async function getServerSideProps({ params }) {
-  const response = await fetch(`http://${process.env.selfService}/api/getBlog`, {
+  const response = await fetch(`/api/getBlog`, {
     method: "POST",
     body: params.id,
   });
