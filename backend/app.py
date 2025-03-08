@@ -3,14 +3,11 @@ import mysql.connector
 import os, json
 
 app = Flask(__name__)
- 
-# $env:MYSQL_HOST="blogsdb.mysql.database.azure.com"
-# $env:MYSQL_USER="blogsdb"
-# $env:MYSQL_PASSWORD="Ploceusterraform1"
-# $env:MYSQL_DB="blogsdb"
+
+table_name = os.environ["MYSQL_TABLENAME"]
 
 def create_table_if_not_exists():
-    table_name = os.environ["MYSQL_TABLENAME"]
+    
     # Connect without specifying the database
     cnx = getMysqlConnection()
     cursor = cnx.cursor()
@@ -42,7 +39,7 @@ def main():
 def getAllBlogs():
     db=getMysqlConnection()
     cursor = db.cursor()
-    cursor.execute("SELECT Author, Id, ShortContent, TimeUploaded, Title FROM blogs ORDER BY TimeUploaded DESC")
+    cursor.execute(f"SELECT Author, Id, ShortContent, TimeUploaded, Title FROM {table_name} ORDER BY TimeUploaded DESC")
     results = cursor.fetchall()    
     columns = [desc[0] for desc in cursor.description] 
     data = [dict(zip(columns, row)) for row in results]
@@ -53,7 +50,7 @@ def getAllBlogs():
 def getBlog(id):
     db=getMysqlConnection()
     cursor = db.cursor()
-    cursor.execute("SELECT Author, Id, Content, TimeUploaded, Title FROM blogs where Id= %s",(id,))
+    cursor.execute(f"SELECT Author, Id, Content, TimeUploaded, Title FROM {table_name} where Id= {id}")
     results = cursor.fetchall()    
     db.close()
     columns = [desc[0] for desc in cursor.description] 
@@ -71,7 +68,7 @@ def createblog():
     ShortContent =request.json["Content"][0:255] + "...."
     db=getMysqlConnection()
     cur = db.cursor()
-    cur.execute("INSERT INTO blogs (Title, Author, ShortContent, Content) VALUES (%s, %s, %s, %s)", (Title, Author, ShortContent, Content))
+    cur.execute(f"INSERT INTO {table_name} (Title, Author, ShortContent, Content) VALUES ({Title}, {Author}, {ShortContent}, {Content})")
     db.commit()
     cur.close()
     db.close()
@@ -86,7 +83,7 @@ def updateblog():
     ShortContent =request.json["Content"][0:255] + "...."
     db=getMysqlConnection()
     cur = db.cursor()
-    cur.execute("UPDATE blogs SET ShortContent=%s, Content=%s WHERE Id=%s", (ShortContent, Content, Id))
+    cur.execute(f"UPDATE {table_name} SET ShortContent='{ShortContent}', Content='{Content}' WHERE Id='{Id}'")
     db.commit()
     cur.close()
     db.close()
@@ -100,7 +97,7 @@ def deleteBlog(id):
         id=0
     db=getMysqlConnection()
     cur = db.cursor()
-    cur.execute("DELETE FROM blogs where Id=%s", (id,))
+    cur.execute(f"DELETE FROM {table_name} where Id={Id}")
     db.commit()
     cur.close()
     db.close()

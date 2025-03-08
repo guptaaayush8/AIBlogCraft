@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
-  const response = await fetch(`http://${process.env.flaskApi}/updateBlog`,
+  // const response = await fetch(`http://${process.env.flaskApi}/updateBlog`,
+    const response = await fetch(`/updateBlog`,
   {
     method: "POST",
     headers: {
