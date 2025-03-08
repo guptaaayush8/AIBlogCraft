@@ -1,0 +1,75 @@
+.card {
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  border: 2px solid #ccc;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cardheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.hr {
+  margin: 2px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+.cardtitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cardsubtitle {
+  margin: 0;
+  color: #888;
+  font-size: 18px;
+}
+
+.cardbody {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.readbutton,
+.deletebutton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.readbutton:hover,
+.deletebutton:hover {
+  background-color: #0069d9;
+}
+
+.deletebutton {
+  background-color: #dc3545;
+}
+
+.deletebutton:hover {
+  background-color: #c82333;
+}
+
+.readbutton::before {
+  /* content: "\f040"; */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 8px;
+}
+
+.deletebutton::before {
+  /* content: "\f1f8"; */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  margin-right: 8px;
+}

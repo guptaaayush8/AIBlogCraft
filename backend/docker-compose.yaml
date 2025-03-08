@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+ ui:
+  build:       
+    context: ./openshiftsample-frontend
+    dockerfile: ./Dockerfile
+  ports:
+  - 3000:3000
+  environment:
+  - flaskApi=api:5000
+  - selfService=ui:3000
+  depends_on:
+  - api
+  - db
+
+ api:
+  build:       
+    context: ./openshiftsample-backend
+    dockerfile: ./Dockerfile
+  environment:
+  - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  - MYSQL_DB=${MYSQL_DB}
+  - MYSQL_HOST=db
+  - MYSQL_USER=root
+  ports:
+  - 5000:5000
+  depends_on:
+  - db
+
+
+ db:
+  container_name: mysqldb
+  image: mysql
+  ports:
+  - 3306:3306
+  environment:
+  - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+  - MYSQL_DATABASE=${MYSQL_DB}
+  volumes:
+  - ./mysql:/var/lib/mysql
+  - ./mysql_config:/etc/mysql
+  - "./mysql.sql:/docker-entrypoint-initdb.d/1.sql"
+

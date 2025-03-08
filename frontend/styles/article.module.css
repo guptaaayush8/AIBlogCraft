@@ -1,0 +1,55 @@
+.article {
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
+  .articleInfo {
+    margin-bottom: 1rem;
+  }
+
+  .articleTitle {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+    
+  .articleAuthor {
+    font-weight: bold;
+  }
+  
+  .articleDate {
+    margin-left: 1rem;
+  }
+  
+  .articleContent {
+    margin-bottom: 1rem;
+  }
+  
+  .articleEdit {
+    background-color: darkgreen;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  .articleEdit:hover {
+    background-color: darkolivegreen;
+  }
+
+  .articleTextArea{
+    width: 100%;
+    height: 100%
+  }
+
+  .articleDelete {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .articleDelete:hover {
+    background-color: #c82333;
+  }
+  
