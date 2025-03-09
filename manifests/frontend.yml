@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: frontend
+  labels:
+    contains: frontend
+
+
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-frontend
+  namespace: frontend
+  labels: 
+    app: frontend
+    language: javascript
+spec:
+  # replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: application/frontend:latest
+        imagePullPolicy: IfNotPresent
+        # envFrom:
+        # - secretRef:
+        #     name: mysqldetails
+        # env: 
+        # - name: MYSQL_HOST
+        #   value: mysql.database.svc.cluster.local
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-frontend
+  namespace: frontend
+spec:
+  selector:
+    app: frontend
+  # clusterIP: None
+  ports:
+  - port: 3000
+    # name: flask
+    targetPort: 3000

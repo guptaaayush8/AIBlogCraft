@@ -5,7 +5,7 @@ const Navbar = () => {
     <>
       <nav className={styles.navBar}>
         <h1 className={styles.title}>
-          <Link href="/">Ploceus Articles</Link>
+          <Link href="/">AI Articles</Link>
         </h1>
         <ul className={styles.ul}>
           <li key="create" className={styles.li}>

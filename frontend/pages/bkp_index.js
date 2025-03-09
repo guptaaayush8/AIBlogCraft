@@ -1,36 +1,11 @@
-import { useEffect, useState } from "react";
 import styles from "../styles/frontPage.module.css";
 import Router from "next/router";
 
-export default function Home() {
-  const [blogs, setBlogs] = useState([]);
-
-  useEffect(() => {
-    fetch(`/api/getAllBlogs`)
-      .then((response) => response.json())
-      .then((data) => setBlogs(data.data))
-      .catch((error) => console.error("Error fetching blogs:", error));
-  }, []);
-
-  const deleteCard = async (id) => {
-    console.log(`Deleting blog ${id}`);
-    const response = await fetch(`/api/deleteBlog`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
-    });
-
-    if (response.ok) {
-      setBlogs(blogs.filter((blog) => blog.id !== id)); // Remove deleted blog from state
-    } else {
-      console.error("Failed to delete blog");
-    }
-  };
-
+export default function Home({ blogs }) {
   return (
     <div>
       {blogs.map((blog) => (
-        <div key={blog.id} className={styles.card}>
+        <div Key={blog.id} className={styles.card} id={blog.id}>
           <div className={styles.cardheader}>
             <a href={`/article/${blog.id}`} className={styles.cardtitle}>
               <h3>{blog.Title}</h3>
@@ -40,16 +15,16 @@ export default function Home() {
               <p className={styles.cardsubtitle}>{blog.TimeUploaded}</p>
             </div>
           </div>
-          <hr />
+          <hr></hr>
           <div className={styles.cardbody}>
             <p className={styles.cardtext}>{blog.ShortContent}</p>
             <div className={styles.buttonGroup}>
-              <a href={`/article/${blog.id}`}>
+              <a href={`/article/${blog.Id}`}>
                 <button className={styles.readbutton}>Read</button>
               </a>
               <button
                 className={styles.deletebutton}
-                onClick={() => deleteCard(blog.id)}
+                onClick={() => deleteCard(blog.Id)}
               >
                 Delete
               </button>
@@ -60,3 +35,26 @@ export default function Home() {
     </div>
   );
 }
+
+export async function getServerSideProps() {
+  // Call the fetch method and passing
+  // the pokeAPI link
+  // const response = await fetch(`http://${process.env.selfService}/api/getAllBlogs`);
+  const response = await fetch(`/api/getAllBlogs`);
+  const data = await response.json();
+  return {
+    props: { blogs: data.data },
+
+  };
+}
+
+const deleteCard = async (id) => {
+  console.log(`this is delete for ${id}`);
+  const response = await fetch(`/api/deleteBlog`, {
+    method: "POST",
+    body: id
+  });
+  const data = await response.json();
+  console.log(data);
+  Router.push("/");
+};
