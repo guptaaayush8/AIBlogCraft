@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  namespace: jenkins
+  labels:
+    name: myingress
+spec:
+  rules:
+  - host: jenkins.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: svc-jenkins
+            port: 
+              number: 8080
