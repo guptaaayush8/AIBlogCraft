@@ -55,6 +55,6 @@ spec:
     app: frontend
   # clusterIP: None
   ports:
-  - port: 3000
+  - port: 3100
     # name: flask
     targetPort: 3000

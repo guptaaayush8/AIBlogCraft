@@ -1,19 +1,54 @@
+apiVersion: v1
+kind: Namespace
+metadata: 
+  name: ingress-application
+  labels:
+    application: aiArticles
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-ing-frontend
+  namespace: ingress-application
+spec:
+  type: ExternalName
+  externalName: svc-frontend.frontend.svc.cluster.local
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-ing-backend
+  namespace: ingress-application
+spec:
+  type: ExternalName
+  externalName: svc-backend.backend.svc.cluster.local
+
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: myingress
+  namespace: ingress-application
   labels:
-    name: myingress
+    application: aiArticles 
 spec:
-  ingress
+  ingressClassName: nginx
   rules:
-  - host: aiarticles.com
+  - host: aiarticles.local
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: <Service>
+            name: svc-ing-frontend
             port: 
-              number: <Port>
+              number: 80
+      - pathType: Prefix
+        path: "/getAllBlogs"
+        backend:
+          service:
+            name: svc-ing-backend
+            port: 
+              number: 5000

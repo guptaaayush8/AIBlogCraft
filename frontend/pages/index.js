@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from "react";
 import styles from "../styles/frontPage.module.css";
 import Router from "next/router";
