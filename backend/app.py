@@ -30,12 +30,12 @@ def getMysqlConnection():
     return mysql.connector.connect(user=os.environ["MYSQL_USER"], host=os.environ["MYSQL_HOST"], port='3306', password=os.environ["MYSQL_PASSWORD"], database=os.environ["MYSQL_DB"])
 
 
-@app.route("/healthCheck")
+@app.route("/api/healthCheck")
 def main():
     return {"status":"ok"}
 
 
-@app.route("/getAllBlogs")
+@app.route("/api/getAllBlogs")
 def getAllBlogs():
     db=getMysqlConnection()
     cursor = db.cursor()
@@ -46,7 +46,7 @@ def getAllBlogs():
     db.close()
     return data
 
-@app.route("/getBlog/<int:id>",methods=["GET"])
+@app.route("/api/getBlog/<int:id>",methods=["GET"])
 def getBlog(id):
     db=getMysqlConnection()
     cursor = db.cursor()
@@ -58,7 +58,7 @@ def getBlog(id):
     return data
 
 
-@app.route("/createBlog", methods=["POST"])
+@app.route("/api/createBlog", methods=["POST"])
 def createblog():
     Title = request.json["Title"]
     Author = request.json["Author"]
@@ -68,13 +68,13 @@ def createblog():
     ShortContent =request.json["Content"][0:255] + "...."
     db=getMysqlConnection()
     cur = db.cursor()
-    cur.execute(f"INSERT INTO {table_name} (Title, Author, ShortContent, Content) VALUES ({Title}, {Author}, {ShortContent}, {Content})")
+    cur.execute(f"INSERT INTO {table_name} (Title, Author, ShortContent, Content) VALUES ('{Title}', '{Author}', '{ShortContent}', '{Content}')")
     db.commit()
     cur.close()
     db.close()
     return ({'message': 'Blog Created successfully'}) 
 
-@app.route("/updateBlog", methods=["POST"])
+@app.route("/api/updateBlog", methods=["POST"])
 def updateblog():
     Content = request.json["Content"]
     Id = request.json["Id"]
@@ -90,14 +90,14 @@ def updateblog():
     return ({'message': 'Blog updated successfully'}) 
 
 
-@app.route("/deleteBlog/<int:id>", methods=["POST"])
+@app.route("/api/deleteBlog/<int:id>", methods=["POST"])
 def deleteBlog(id):
     print(id)
     if not id: 
         id=0
     db=getMysqlConnection()
     cur = db.cursor()
-    cur.execute(f"DELETE FROM {table_name} where Id={Id}")
+    cur.execute(f"DELETE FROM {table_name} where Id={id}")
     db.commit()
     cur.close()
     db.close()

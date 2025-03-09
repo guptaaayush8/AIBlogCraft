@@ -1,3 +1,4 @@
+// 'use client'
 import React, { useState } from "react";
 import Router from "next/router";
 import styles from "../../styles/create.module.css";
@@ -20,6 +21,9 @@ const CreatePost = () => {
     const response = await fetch("/api/createBlog", {
       method: "POST",
       body: JSON.stringify(formData),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     const data = await response.json();
     console.log(data);

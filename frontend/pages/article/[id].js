@@ -14,15 +14,15 @@ export default function BlogPage() {
   useEffect(() => {
     if (!id) return;
 
-    fetch(`/api/getBlog`, {
-      method: "POST",
+    fetch(`/api/getBlog/${id}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
+      // body: JSON.stringify({ id }),
     })
       .then((res) => res.json())
       .then((data) => {
-        setBlog(data.data[0]);
-        setText(data.data[0]?.Content || "");
+        setBlog(data[0]);
+        setText(data[0]?.Content || "");
       })
       .catch((error) => console.error("Error fetching blog:", error));
   }, [id]);
@@ -40,10 +40,10 @@ export default function BlogPage() {
 
   const deleteCard = async (id) => {
     console.log(`Deleting blog ${id}`);
-    const response = await fetch("/api/deleteBlog", {
+    const response = await fetch(`/api/deleteBlog/${id}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id }),
+      // body: JSON.stringify({ id }),
     });
 
     if (response.ok) {

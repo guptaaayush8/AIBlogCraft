@@ -39,16 +39,17 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: svc-ing-frontend
-            port: 
-              number: 80
-      - pathType: Prefix
-        path: "/getAllBlogs"
+        path: "/api"
         backend:
           service:
             name: svc-ing-backend
             port: 
               number: 5000
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: svc-ing-frontend
+            port: 
+              number: 3100
+      
