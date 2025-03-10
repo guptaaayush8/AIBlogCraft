@@ -14,8 +14,8 @@ spec:
       labels:
         app: jenkins
     spec:
-      securityContext:
-        fsGroup: 1000
+      # securityContext:
+      #   fsGroup: 1000
       volumes:
         - name: vol-jenkins
           persistentVolumeClaim:
@@ -24,10 +24,14 @@ spec:
       - name: jenkins
         
         securityContext:
-          runAsGroup: 1000
-          runAsUser: 1000
+          # runAsGroup: 1000
+          runAsUser: 0
         image: jenkins/jenkins
         imagePullPolicy: IfNotPresent
+        # command:
+        # - "/bin/sh"
+        # - "-c"
+        # - "sudo chmod -R 777 /var/jenkins_home"
         resources:
           limits:
             memory: "512Mi"
