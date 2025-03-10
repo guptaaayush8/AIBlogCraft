@@ -34,7 +34,7 @@ spec:
         # - "sudo chmod -R 777 /var/jenkins_home"
         resources:
           limits:
-            memory: "512Mi"
+            memory: "2Gi"
             cpu: "1000m"
         volumeMounts:
         - name: vol-jenkins
