@@ -6,6 +6,8 @@ metadata:
   labels:
     app: jenkins
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: jenkins
@@ -20,6 +22,10 @@ spec:
         - name: vol-jenkins
           persistentVolumeClaim:
             claimName: pvc-jenkins
+        # - name: kubectl-bin
+        #   hostPath:
+        #     path: "/run/desktop/mnt/host/c/Program Files/Docker/Docker/resources/bin/kubectl"
+        #     # type: File
       containers:
       - name: jenkins
         
@@ -28,10 +34,13 @@ spec:
           runAsUser: 0
         image: jenkins/jenkins
         imagePullPolicy: IfNotPresent
-        # command:
-        # - "/bin/sh"
-        # - "-c"
-        # - "sudo chmod -R 777 /var/jenkins_home"
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+            chmod +x kubectl && \
+            mv kubectl /usr/bin/ && \
+            exec /usr/bin/tini -- /usr/local/bin/jenkins.sh  # Start Jenkins after installing kubectl
         resources:
           limits:
             memory: "2Gi"
@@ -39,6 +48,9 @@ spec:
         volumeMounts:
         - name: vol-jenkins
           mountPath: /var/jenkins_home
+        # - name: kubectl-bin
+        #   mountPath: /usr/local/bin/kubectl
+        #   subPath: kubectl
         ports:
         - containerPort: 8080
         - containerPort: 50000
