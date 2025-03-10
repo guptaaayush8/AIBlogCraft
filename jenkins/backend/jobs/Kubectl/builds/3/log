@@ -1,0 +1,71 @@
+Started by user [8mha:////4HaPjl5wT3LpzO0aY2PEvoaEyCxN0T/sVoFC/Fms7dzCAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyeEgZu/dLi1CL9xJTczDwA4LbuW8AAAAA=[0mAayush Gupta
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/Kubectl
+[Kubectl] $ /bin/sh -xe /tmp/jenkins7980734129836042059.sh
++ env
+JENKINS_HOME=/var/jenkins_home
+SVC_JENKINS_PORT_8080_TCP=tcp://10.100.174.246:8080
+KUBERNETES_PORT=tcp://10.96.0.1:443
+KUBERNETES_SERVICE_PORT=443
+JENKINS_UC_EXPERIMENTAL=https://updates.jenkins.io/experimental
+CI=true
+RUN_CHANGES_DISPLAY_URL=http://jenkins.local/job/Kubectl/3/display/redirect?page=changes
+HOSTNAME=dep-jenkins-7f8f7f7f74-xfjrl
+SHLVL=0
+NODE_LABELS=built-in
+HUDSON_URL=http://jenkins.local/
+HOME=/root
+BUILD_URL=http://jenkins.local/job/Kubectl/3/
+HUDSON_COOKIE=0679a8cf-1931-4d40-814c-ce636e080d43
+JENKINS_SERVER_COOKIE=de8d9399f557780c
+JENKINS_UC=https://updates.jenkins.io
+WORKSPACE=/var/jenkins_home/workspace/Kubectl
+REF=/usr/share/jenkins/ref
+NODE_NAME=built-in
+SVC_JENKINS_SERVICE_PORT_UI=8080
+RUN_ARTIFACTS_DISPLAY_URL=http://jenkins.local/job/Kubectl/3/display/redirect?page=artifacts
+EXECUTOR_NUMBER=0
+RUN_TESTS_DISPLAY_URL=http://jenkins.local/job/Kubectl/3/display/redirect?page=tests
+BUILD_DISPLAY_NAME=#3
+JENKINS_VERSION=2.484
+KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
+JENKINS_INCREMENTALS_REPO_MIRROR=https://repo.jenkins-ci.org/incrementals
+SVC_JENKINS_SERVICE_PORT_WORKER=50000
+HUDSON_HOME=/var/jenkins_home
+JOB_BASE_NAME=Kubectl
+PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+BUILD_ID=3
+KUBERNETES_PORT_443_TCP_PORT=443
+BUILD_TAG=jenkins-Kubectl-3
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+JENKINS_URL=http://jenkins.local/
+LANG=C.UTF-8
+JOB_URL=http://jenkins.local/job/Kubectl/
+SVC_JENKINS_PORT_50000_TCP_ADDR=10.100.174.246
+BUILD_NUMBER=3
+RUN_DISPLAY_URL=http://jenkins.local/job/Kubectl/3/display/redirect
+SVC_JENKINS_SERVICE_HOST=10.100.174.246
+SVC_JENKINS_PORT_8080_TCP_ADDR=10.100.174.246
+JENKINS_SLAVE_AGENT_PORT=50000
+SVC_JENKINS_PORT_50000_TCP_PORT=50000
+HUDSON_SERVER_COOKIE=de8d9399f557780c
+JOB_DISPLAY_URL=http://jenkins.local/job/Kubectl/display/redirect
+SVC_JENKINS_PORT_50000_TCP_PROTO=tcp
+SVC_JENKINS_PORT_8080_TCP_PORT=8080
+KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
+KUBERNETES_SERVICE_PORT_HTTPS=443
+SVC_JENKINS_PORT_8080_TCP_PROTO=tcp
+JOB_NAME=Kubectl
+COPY_REFERENCE_FILE_LOG=/var/jenkins_home/copy_reference_file.log
+PWD=/var/jenkins_home/workspace/Kubectl
+JAVA_HOME=/opt/java/openjdk
+KUBERNETES_SERVICE_HOST=10.96.0.1
+SVC_JENKINS_SERVICE_PORT=8080
+SVC_JENKINS_PORT=tcp://10.100.174.246:8080
+WORKSPACE_TMP=/var/jenkins_home/workspace/Kubectl@tmp
+SVC_JENKINS_PORT_50000_TCP=tcp://10.100.174.246:50000
++ hostname
+dep-jenkins-7f8f7f7f74-xfjrl
++ which kubectl
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE
