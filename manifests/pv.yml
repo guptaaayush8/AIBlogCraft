@@ -9,7 +9,7 @@ spec:
     storage: 1Gi
   storageClassName: hostpath
   hostPath:
-    path: /mysql
+    path: /run/desktop/mnt/host/d/Project/mysql
 
 
 --- 

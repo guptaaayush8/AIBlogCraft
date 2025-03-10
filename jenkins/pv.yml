@@ -9,7 +9,7 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Recycle
   hostPath:
-    path: /hostpath-jenkins
+    path: /run/desktop/mnt/host/d/Project/jenkins/backend
   storageClassName: hostpath
 
 ---
