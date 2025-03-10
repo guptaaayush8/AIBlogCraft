@@ -13,12 +13,34 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>env
-hostname
-which kubectl</command>
+      <command>kubectl config get-contexts</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
-  <buildWrappers/>
+  <buildWrappers>
+    <org.csanchez.jenkins.plugins.kubernetes.KubectlBuildWrapper plugin="kubernetes@4324.vfec199a_33512">
+      <serverUrl>https://kubernetes.docker.internal:6443</serverUrl>
+      <credentialsId>docker-desktop</credentialsId>
+      <caCertificate>-----BEGIN CERTIFICATE-----
+MIIDBTCCAe2gAwIBAgIIFzH6dU6hm18wDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
+AxMKa3ViZXJuZXRlczAeFw0yNTAzMDEwNTUwMzJaFw0zNTAyMjcwNTU1MzJaMBUx
+EzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+AoIBAQDqBRJBAHw2xERHRNrmAfguara1nVBS5qxYaHocCxQHctjUWQESVuUs9ce2
+9wsIUXU8b1HL0uOIunmdnXKOEfkpQQ83gb6iZEMyosKt7IMvuVAeW56n154Dq9sv
+H58C9qP85i17ZKsyIbmSpizQC3mpEnUMpqBdPsL/ZH8pPkDiPkpy7uxqVfbjoNk3
++L1w/uSvcHYRmXToxROPqaqEubfwZcJT9m2XjbN4Wr0sIsaGw2NzZtkOLNZltcfP
+Dme82F8/SdUD1Juq3U5qvJHMt5BQNj2RZ3XdSvmTsDM5/gHGHOypMFshbSqHnfur
+0i+HgNvjYnDj+jc6iV+WmHffiUETAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP
+BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSukfEplt2DkZuxQPdwChI9kPovGzAV
+BgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQBKlurynHLF
+z66xcFY3DOKvrr9oCqiLUx7TcguwKwy8Wm9PPD+d2iVUYldRYIj0SpOUfQ8ZkIhE
+DwD2M0OCP93F8IHHqWZFMSY/oiFThG8WY4rUegGaq7+FHvt3aXJWBzkzWjE3kmqV
+yuaWQM336y/J+7PTnoqUvR702mr02nZifw+0FOsMcg/IRTeHbkzOomxmu0wFWjAI
+hJCPPh6+2J5/U4DwY8hwoFzK9oUvIwJ+qCjJg36PKHa1HYhl7+CGjbvFWDCRTEG5
+w4ZSjJ46E5CJpO/NeAroqspplv1T57ggoVw+/NqCtzWAsEt+uSX3zA32yGvzCQHv
+tSTbrWCyKlOU
+-----END CERTIFICATE-----</caCertificate>
+    </org.csanchez.jenkins.plugins.kubernetes.KubectlBuildWrapper>
+  </buildWrappers>
 </project>
