@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Get Kubernetes Namespaces') {
       steps {
-        sh 'kubectl get ns'
+        sh 'kubectl config get-contexts'
       }
     }
   }
