@@ -35,7 +35,6 @@
     <hudson.search.UserSearchProperty>
       <insensitiveSearch>true</insensitiveSearch>
     </hudson.search.UserSearchProperty>
-    <io.jenkins.plugins.thememanager.ThemeUserProperty plugin="theme-manager@278.v2e3c063e42cc"/>
     <hudson.model.TimeZoneProperty/>
     <jenkins.model.experimentalflags.UserExperimentalFlagsProperty>
       <flags/>
@@ -51,5 +50,8 @@
         <tokenList/>
       </tokenStore>
     </jenkins.security.ApiTokenProperty>
+    <io.jenkins.plugins.thememanager.ThemeUserProperty plugin="theme-manager@278.v2e3c063e42cc">
+      <theme class="io.jenkins.plugins.darktheme.DarkThemeManagerFactory" plugin="dark-theme@524.vd675b_22b_30cb_"/>
+    </io.jenkins.plugins.thememanager.ThemeUserProperty>
   </properties>
 </user>
